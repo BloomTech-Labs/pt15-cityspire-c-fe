@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import RenderDataViz from './RenderDataViz';
+import RenderDataViz from '../components/RenderDataViz';
 import { useOktaAuth } from '@okta/okta-react';
 import { Select } from 'antd';
-import states from './statedata.js';
+import states from '../components/statedata.js';
 const { Option } = Select;
 
 function DataVizContainer() {

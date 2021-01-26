@@ -10,12 +10,12 @@ import {
 import { Security, LoginCallback, SecureRoute } from '@okta/okta-react';
 import 'antd/dist/antd.less';
 
-import { NotFoundPage } from './components/pages/NotFound';
-import { ExampleListPage } from './components/pages/ExampleList';
-import { HomePage } from './components/pages/Home';
-import { ProfileListPage } from './components/pages/ProfileList';
-import { LoginPage } from './components/pages/Login';
-import { ExampleDataViz } from './components/pages/ExampleDataViz';
+import { NotFoundPage } from './components/notFound/components';
+import { ExampleListPage } from './components/exampleList/components';
+import { HomePage } from './components/home/components';
+import { ProfileListPage } from './components/profileList/components';
+import { LoginPage } from './components/login/components';
+import { ExampleDataViz } from './components/exampleDataViz/components';
 import { config } from './utils/oktaConfig';
 import { LoadingComponent } from './components/common';
 
@@ -40,23 +40,22 @@ function App() {
   };
 
   return (
-    
     <Security {...config} onAuthRequired={authHandler}>
-    <Switch>
-      <Route path="/login" component={LoginPage} />
-      <Route path="/implicit/callback" component={LoginCallback} />
-      {/* any of the routes you need secured should be registered as SecureRoutes */}
-      <SecureRoute
-        path="/"
-        exact
-        component={() => <HomePage LoadingComponent={LoadingComponent} />}
-      />
-      <SecureRoute path="/example-list" component={ExampleListPage} />
-      
-      <SecureRoute path="/profile-list" component={ProfileListPage} />
-      <SecureRoute path="/datavis" component={ExampleDataViz} />
-      <Route component={NotFoundPage} />
-    </Switch>
+      <Switch>
+        <Route path="/login" component={LoginPage} />
+        <Route path="/implicit/callback" component={LoginCallback} />
+        {/* any of the routes you need secured should be registered as SecureRoutes */}
+        <SecureRoute
+          path="/"
+          exact
+          component={() => <HomePage LoadingComponent={LoadingComponent} />}
+        />
+        <SecureRoute path="/example-list" component={ExampleListPage} />
+
+        <SecureRoute path="/profile-list" component={ProfileListPage} />
+        <SecureRoute path="/datavis" component={ExampleDataViz} />
+        <Route component={NotFoundPage} />
+      </Switch>
     </Security>
   );
 }

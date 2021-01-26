@@ -1,27 +1,23 @@
 import React from 'react';
-import { useOktaAuth } from '@okta/okta-react';
 
-import { getProfileData } from '../../../api';
+import { getExampleData } from '../../../api';
 
 import { List } from '../../common';
-
-import RenderProfileListPage from './RenderProfileListPage';
+import RenderExampleListPage from '../components/RenderExampleListPage';
 
 // Here is an example of using our reusable List component to display some list data to the UI.
-const ProfileList = () => {
-  const { authState } = useOktaAuth();
-
+const ExampleList = () => {
   return (
     <List
       // Here we are passing our Axios request helper function as a callback.
-      getItemsData={() => getProfileData(authState)}
+      getItemsData={getExampleData}
       // Here we are passing in a component we want to show whilst waiting for our API request
       // to complete.
-      LoadingComponent={() => <div>Loading Profiles...</div>}
+      LoadingComponent={() => <div>Loading Items...</div>}
       // Here we are passing in a component that receives our new data and returns our JSX elements.
-      RenderItems={RenderProfileListPage}
+      RenderItems={RenderExampleListPage}
     />
   );
 };
 
-export default ProfileList;
+export default ExampleList;

@@ -18,6 +18,7 @@ import { LoginPage } from './components/login/components';
 import { ExampleDataViz } from './components/exampleDataViz/components';
 import { config } from './utils/oktaConfig';
 import { LoadingComponent } from './components/common';
+import { LandingPage } from './components/landing/components';
 
 ReactDOM.render(
   <Router>
@@ -45,9 +46,9 @@ function App() {
         <Route path="/login" component={LoginPage} />
         <Route path="/implicit/callback" component={LoginCallback} />
         {/* any of the routes you need secured should be registered as SecureRoutes */}
+        <Route path="/" exact component={LandingPage} />
         <SecureRoute
-          path="/"
-          exact
+          path="/dashboard"
           component={() => <HomePage LoadingComponent={LoadingComponent} />}
         />
         <SecureRoute path="/example-list" component={ExampleListPage} />

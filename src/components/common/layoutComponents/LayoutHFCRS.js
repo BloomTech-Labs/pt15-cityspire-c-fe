@@ -30,7 +30,7 @@ const LayoutHFCRS = props => {
   return (
     <Layout className="page-layout">
       <Header className="header-footer">
-        <HeaderContents>{props.HeaderContents}</HeaderContents>
+        <HeaderContents>{props.HeaderComponents}</HeaderContents>
       </Header>
       <Layout>
         <Content className="content">

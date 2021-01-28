@@ -1,4 +1,4 @@
-const config = require('./src/antD/styles/theme-overrides');
+const config = require('./src/antD/themes/theme-overrides');
 const CracoLessPlugin = require('craco-less');
 
 module.exports = {

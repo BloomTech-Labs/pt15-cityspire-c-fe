@@ -12,7 +12,7 @@ import 'antd/dist/antd.less';
 
 import { NotFoundPage } from './components/notFound/components';
 import { ExampleListPage } from './components/exampleList/components';
-import { HomePage } from './components/home/components';
+import Home from './components/home/pages/Home';
 import { ProfileListPage } from './components/profileList/components';
 import { LoginPage } from './components/login/components';
 import { ExampleDataViz } from './components/exampleDataViz/components';
@@ -47,9 +47,9 @@ function App() {
         <Route path="/implicit/callback" component={LoginCallback} />
         {/* any of the routes you need secured should be registered as SecureRoutes */}
         <Route path="/" exact component={LandingPage} />
-        <SecureRoute
-          path="/dashboard"
-          component={() => <HomePage LoadingComponent={LoadingComponent} />}
+        <Route
+          path="/home"
+          component={() => <Home LoadingComponent={LoadingComponent} />}
         />
         <SecureRoute path="/example-list" component={ExampleListPage} />
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, act, cleanup, waitForElement } from '@testing-library/react';
 
-import ExampleListContainer from '../components/pages/ExampleList/ExampleListContainer';
+import ExampleListContainer from '../components/exampleList/pages/ExampleListContainer';
 
 afterEach(() => {
   cleanup();

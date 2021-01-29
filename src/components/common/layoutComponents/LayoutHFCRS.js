@@ -5,7 +5,7 @@ import FooterContents from './FooterContents';
 import ContentContents from './ContentContents';
 import SideBarContents from './SidebarContents';
 
-import '../../../antD/styles/LayoutHFCRS.css';
+import '../../../antD/styles/layoutHFCRS.css';
 
 // This is antd's page layout component.
 // It contains a header, footer main content area (center) and

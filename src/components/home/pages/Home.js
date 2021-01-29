@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 
 import LayoutHFCRS from '../../common/layoutComponents/LayoutHFCRS';
+import Map from '../components/Map';
+import MapHeader from '../components/MapHeader';
 
 // Implementation makes use the layout: LayoutHFCRS.js
 
 const Home = ({ LoadingComponent }) => {
   return (
-    <div>
-      <LoadingComponent message="Rendering map and fetching saved cities..." />
+    <div className="page">
       <LayoutHFCRS
-        HeaderComponents={null}
+        HeaderComponents={<MapHeader />}
         FooterComponents={null}
-        ContentComponents={null}
+        ContentComponents={<Map />}
         SidebarComponents={null}
       />
     </div>

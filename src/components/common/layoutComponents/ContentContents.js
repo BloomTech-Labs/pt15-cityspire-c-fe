@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ContentContents = props => {
-  return <div>{props.children}</div>;
+  return <>{props.children}</>;
 };
 
 export default ContentContents;

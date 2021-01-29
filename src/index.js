@@ -20,10 +20,14 @@ import { config } from './utils/oktaConfig';
 import { LoadingComponent } from './components/common';
 import { LandingPage } from './components/landing/components';
 
+import { ContextProvider } from './state/contexts';
+
 ReactDOM.render(
   <Router>
     <React.StrictMode>
-      <App />
+      <ContextProvider>
+        <App />
+      </ContextProvider>
     </React.StrictMode>
   </Router>,
   document.getElementById('root')

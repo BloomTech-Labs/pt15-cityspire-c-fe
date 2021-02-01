@@ -1,13 +1,8 @@
 import React from 'react';
-import { Avatar, Button, Input } from 'antd';
+import { Button } from 'antd';
 import '../../../antD/styles/mapHeader.css';
 
-const MapHeader = () => {
-  const { Search } = Input;
-
-  const onSearch = () => {
-    // This is our search for finding the city they entered
-  };
+const LandingHeader = () => {
   return (
     <div className="header-footer">
       <div className="map-header">
@@ -27,4 +22,4 @@ const MapHeader = () => {
   );
 };
 
-export default MapHeader;
+export default LandingHeader;

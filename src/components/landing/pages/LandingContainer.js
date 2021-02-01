@@ -1,14 +1,16 @@
 import React from 'react';
 import RenderLandingPage from '../components/RenderLandingPage';
 import LandingHeader from '../components/LandingHeader';
-import LayoutHFCRS from '../../common/layoutComponents/LayoutHFCRS';
+import Footer from '../../common/Footer';
+import '../../../antD/styles/landing.css';
 
 function LandingContainer({ LoadingComponent }) {
   return (
-    <>
+    <div className="page page-layout">
       <LandingHeader />
       <RenderLandingPage />
-    </>
+      <Footer />
+    </div>
   );
 }
 

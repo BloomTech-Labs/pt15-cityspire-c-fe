@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import LayoutHFCRS from '../../common/layoutComponents/LayoutHFCRS';
 import DetailsPane from '../components/DetailsPane';

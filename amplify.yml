@@ -13,7 +13,16 @@ frontend:
   artifacts:
     baseDirectory: build
     files:
-      - "**/*"
+      - '**/*'
   cache:
     paths:
       - node_modules/**/*
+  customHeaders:
+    - pattern: '**/manifest.json'
+      headers:
+        - key: 'Access-Control-Allow-Origin'
+          value: '*'
+        - key: 'Access-Control-Allow-Headers'
+          value: '*'
+        - key: 'Access-Control-Allow-Methods'
+          value: 'GET'

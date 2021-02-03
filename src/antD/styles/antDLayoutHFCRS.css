@@ -32,3 +32,11 @@
 .page-layout .content {
   padding: 5px 5px 5px 5px;
 }
+.footer {
+  background: #7c98b3;
+text-align: center;
+position: fixed;
+width: 100vw;
+left: 0;
+bottom: 0;
+}

@@ -15,11 +15,11 @@ const MapHeader = () => {
         <AlgoliaPlaces
           placeholder="Search for a city"
           options={{
-            appId: 'pl84ZNIL3EXV',
-            apiKey: '5e5fd2dfa544e1c1a95a53247ff59920',
-            language: 'en',
-            countries: ['us'],
-            type: 'city',
+            appId: process.env.REACT_APP_ALGOLIA_PLACES_APP_ID, //`${process.env.REACT_APP_ALGOLIA_PLACES_APP_ID}`,
+            apiKey: process.env.REACT_APP_ALGOLIA_PLACES_API_KEY, //`${process.env.REACT_APP_ALGOLIA_PLACES_API_KEY}`,
+            language: process.env.REACT_APP_ALGOLIA_PLACES_LANGUAGE, //`${process.env.REACT_APP_ALGOLIA_PLACES_LANGUAGE}`,
+            countries: [process.env.REACT_APP_ALGOLIA_PLACES_COUNTRIES], //[`${process.env.REACT_APP_ALGOLIA_PLACES_COUNTRIES}`],
+            type: process.env.REACT_APP_ALGOLIA_PLACES_TYPE, //`${process.env.REACT_APP_ALGOLIA_PLACES_TYPE}`,
           }}
           onChange={({ query, rawAnswer, suggestion, suggestionIndex }) =>
             console.log(

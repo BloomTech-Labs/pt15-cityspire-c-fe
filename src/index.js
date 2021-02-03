@@ -26,7 +26,8 @@ ReactDOM.render(
   <Router>
     <React.StrictMode>
       <ContextProvider>
-        <App />
+        {/* <App /> */}
+        <Home />
       </ContextProvider>
     </React.StrictMode>
   </Router>,

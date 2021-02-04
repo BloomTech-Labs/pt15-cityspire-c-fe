@@ -36,7 +36,7 @@ const LayoutHFC = props => {
           <ContentContents>{props.ContentComponents}</ContentContents>
         </Content>
       </Layout>
-      <Footer className="header-footer">
+      <Footer className="footer">
         <FooterContents>{props.FooterComponents}</FooterContents>
       </Footer>
     </Layout>

@@ -3,12 +3,12 @@ import RenderLandingPage from '../components/RenderLandingPage';
 import LandingHeader from '../components/LandingHeader';
 import Footer from '../../common/Footer';
 import '../../../antD/styles/landing.css';
-import LandingHFCRS from '../../common/layoutComponents/LandingHFCRS';
+import LayoutHFC from '../../common/layoutComponents/LayoutHFC';
 
 function LandingContainer() {
   return (
     <div className="page page-layout">
-      <LandingHFCRS
+      <LayoutHFC
         HeaderComponents={<LandingHeader />}
         FooterComponents={<Footer />}
         ContentComponents={<RenderLandingPage />}

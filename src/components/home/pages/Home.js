@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import LayoutHFCRS from '../../common/layoutComponents/LayoutHFCRS';
 import DetailsPane from '../components/DetailsPane';
@@ -9,14 +9,15 @@ import MapHeader from '../components/MapHeader';
 // Adding multiple components FooterComponents={<><Comp1 /> <Comp2 /></>}
 
 const Home = ({ LoadingComponent }) => {
+  const [mapLatLng, setMapLatLng] = useState([-104.9876, 39.7405]);
   return (
     <div className="page">
       <LayoutHFCRS
-        HeaderComponents={<MapHeader />}
+        HeaderComponents={<MapHeader setMapLatLng={setMapLatLng} />}
         FooterComponents={null}
         ContentComponents={
           <>
-            <Map /> <DetailsPane />
+            <Map mapLatLng={mapLatLng} /> <DetailsPane />
           </>
         }
         SidebarComponents={null}

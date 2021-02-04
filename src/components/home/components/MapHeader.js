@@ -3,7 +3,7 @@ import { Avatar, Button } from 'antd';
 import '../../../antD/styles/mapHeader.css';
 import AlgoliaPlaces from 'algolia-places-react';
 
-const MapHeader = () => {
+const MapHeader = ({ setMapLatLng }) => {
   const onAlgoliaChange = ({
     query,
     rawAnswer,
@@ -11,7 +11,7 @@ const MapHeader = () => {
     suggestionIndex,
   }) => {
     // Mouse Over and keyboard onChange event
-    console.log('onChange');
+    setMapLatLng([suggestion.latlng.lng, suggestion.latlng.lat]);
   };
 
   const onAlgoliaSuggestions = ({ rawAnswer, query, suggestions }) => {

@@ -4,7 +4,7 @@ import '../../../antD/styles/map.css';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
-const Map = () => {
+const Map = ({ mapLatLng }) => {
   const mapContainerRef = useRef(null);
 
   useEffect(() => {
@@ -21,8 +21,13 @@ const Map = () => {
 
     map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
+    map.flyTo({
+      center: mapLatLng,
+    });
+
     return () => map.remove();
-  }, []);
+  }, [mapLatLng]);
+
   return <div className="map-container" ref={mapContainerRef} />;
 };
 

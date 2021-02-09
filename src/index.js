@@ -19,6 +19,7 @@ import { ExampleDataViz } from './components/exampleDataViz/components';
 import { config } from './utils/oktaConfig';
 import { LoadingComponent } from './components/common';
 import { LandingPage } from './components/landing/components';
+import Dashboard from './components/dashboard/pages/Dashboard';
 
 import { ContextProvider } from './state/contexts';
 
@@ -55,6 +56,7 @@ function App() {
           path="/home"
           component={() => <Home LoadingComponent={LoadingComponent} />}
         />
+        <SecureRoute path="/dashboard" component={Dashboard} />
         <SecureRoute path="/example-list" component={ExampleListPage} />
 
         <SecureRoute path="/profile-list" component={ProfileListPage} />

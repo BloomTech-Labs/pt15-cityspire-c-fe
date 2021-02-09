@@ -2,6 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import '../../../antD/styles/map.css';
 
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
+
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
 const Map = ({ mapLatLng }) => {

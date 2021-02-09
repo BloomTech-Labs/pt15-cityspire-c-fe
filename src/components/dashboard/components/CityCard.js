@@ -3,16 +3,13 @@ import React from 'react';
 import Button from '../../common/Button';
 
 const CityCard = props => {
-  //findSavedCity simply searches an array for the city object with the same city name of the current card
-  const findSavedCity = city => city.name === props.cityName;
-
+  console.log(props.saved);
   const deleteFromState = () => {
     //state hooks for saved cities passed as props. They are props.saved and props.setSaved
     const newState = props.saved;
-    const unsaving = newState.find(findSavedCity(props.cityName));
-    const index = newState.indexOf(unsaving);
+    const index = newState.findIndex(city => city.cityName === props.cityName);
     newState.splice(index, 1);
-    props.setSaved(newState);
+    props.setSaved([...newState]);
   };
 
   const deleteFromDB = () => {
@@ -28,7 +25,7 @@ const CityCard = props => {
     <div className="city-card">
       <div>
         <h3>City: {props.cityName}</h3>
-        <Button handleClick={unsave}>Unsave</Button>
+        <Button handleClick={unsave} buttonText="Unsave" />
       </div>
 
       <p>Population: {props.population}</p>

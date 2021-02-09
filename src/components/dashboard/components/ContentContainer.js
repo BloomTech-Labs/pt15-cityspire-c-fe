@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 import { Context } from '../../../state/contexts';
 
@@ -6,14 +6,15 @@ import CityCard from './CityCard';
 
 const ContentContainer = () => {
   const { savedCities } = useContext(Context);
-  const [saved, setSaved] = useState(savedCities);
+  const [saved, setSaved] = savedCities;
 
   return (
     <div className="city-cards-container">
       {saved.map(city => {
         return (
           <CityCard
-            name={city.cityName}
+            key={city.cityName}
+            cityName={city.cityName}
             population={city.population}
             rent={city.rent}
             walkScore={city.walkScore}

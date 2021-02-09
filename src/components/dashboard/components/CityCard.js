@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../../../antD/styles/cityCard.css';
+
 import Button from '../../common/Button';
 
 const CityCard = props => {
@@ -23,15 +25,16 @@ const CityCard = props => {
 
   return (
     <div className="city-card">
-      <div>
+      <div className="card-header">
         <h3>City: {props.cityName}</h3>
         <Button handleClick={unsave} buttonText="Unsave" />
       </div>
-
-      <p>Population: {props.population}</p>
-      <p>Average Rent: {props.rent}</p>
-      <p>Walkability Score: {props.walkScore}</p>
-      <p>Livability Score: {props.liveScore}</p>
+      <div className="card-content">
+        <p>Population: {props.population}</p>
+        <p>Average Rent: {props.rent}</p>
+        <p>Walkability Score: {props.walkScore}</p>
+        <p>Livability Score: {props.liveScore}</p>
+      </div>
     </div>
   );
 };

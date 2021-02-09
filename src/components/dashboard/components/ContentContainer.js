@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 
 import { Context } from '../../../state/contexts';
+import '../../../antD/styles/dashboard.css';
 
 import CityCard from './CityCard';
 
@@ -9,7 +10,7 @@ const ContentContainer = () => {
   const [saved, setSaved] = savedCities;
 
   return (
-    <div className="city-cards-container">
+    <div className="dashboard">
       {saved.map(city => {
         return (
           <CityCard

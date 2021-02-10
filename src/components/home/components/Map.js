@@ -7,29 +7,38 @@ mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worke
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
-const Map = ({ mapLatLng }) => {
+const Map = props => {
   const mapContainerRef = useRef(null);
+  const map = useRef();
 
   useEffect(() => {
-    const map = new mapboxgl.Map({
+    console.log('Hitting 1st useEffect()');
+    map.current = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [-104.9876, 39.7405],
       zoom: 12.5,
     });
 
-    map.on('load', () => {
-      map.resize();
+    map.current.on('load', () => {
+      map.current.resize();
     });
 
-    map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
+    map.current.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
-    map.flyTo({
-      center: mapLatLng,
+    // map.flyTo({
+    //   center: mapLatLng,
+    // });
+
+    return () => map.current.remove();
+  }, [props.map]);
+
+  useEffect(() => {
+    console.log('Hitting 2nd useEffect()');
+    map.current.flyTo({
+      center: props.mapLatLng,
     });
-
-    return () => map.remove();
-  }, [mapLatLng]);
+  }, [props.mapLatLng]);
 
   return <div className="map-container" ref={mapContainerRef} />;
 };

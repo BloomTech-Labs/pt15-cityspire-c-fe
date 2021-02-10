@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'antd';
-import '../../../antD/styles/mapHeader.css';
+import '../../../antD/styles/landingHeader.css';
 
 const LandingHeader = () => {
   return (
@@ -13,7 +13,7 @@ const LandingHeader = () => {
           <p>Use data to find a place right for you to live.</p>
         </div>
         <div className="right-header-section">
-          <Button type="text" className="login-button" ghost href="/login">
+          <Button type="text" className="login-button" href="/login">
             Login
           </Button>
         </div>

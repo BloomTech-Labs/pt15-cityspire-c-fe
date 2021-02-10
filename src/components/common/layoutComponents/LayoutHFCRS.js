@@ -40,7 +40,7 @@ const LayoutHFCRS = props => {
           <SideBarContents>{props.SideBarComponents}</SideBarContents>
         </Sider>
       </Layout>
-      <Footer className="header-footer">
+      <Footer className="footer">
         <FooterContents>{props.FooterComponents}</FooterContents>
       </Footer>
     </Layout>

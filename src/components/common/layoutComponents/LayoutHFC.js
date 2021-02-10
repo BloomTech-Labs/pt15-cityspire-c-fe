@@ -25,7 +25,7 @@ import '../../../antD/styles/antDLayoutHFCRS.css';
 // If not needed still pass null
 
 const LayoutHFC = props => {
-  const { Header, Footer, Sider, Content } = Layout;
+  const { Header, Footer, Content } = Layout;
   return (
     <Layout className="page-layout">
       <Header className="header-footer">
@@ -36,7 +36,7 @@ const LayoutHFC = props => {
           <ContentContents>{props.ContentComponents}</ContentContents>
         </Content>
       </Layout>
-      <Footer className="header-footer">
+      <Footer className="footer">
         <FooterContents>{props.FooterComponents}</FooterContents>
       </Footer>
     </Layout>

@@ -7,17 +7,22 @@ mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worke
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
-const Map = props => {
+const Map = ({ mapLatLng }) => {
   const mapContainerRef = useRef(null);
   const map = useRef();
 
+  // On useEffect hooks, ORDER MATTERS, it must set the reference
+  // to the map before accessing methods of map.
   useEffect(() => {
-    console.log('Hitting 1st useEffect()');
     map.current = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [-104.9876, 39.7405],
       zoom: 12.5,
+    });
+
+    map.current.flyTo({
+      center: mapLatLng,
     });
 
     map.current.on('load', () => {
@@ -26,19 +31,14 @@ const Map = props => {
 
     map.current.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
-    // map.flyTo({
-    //   center: mapLatLng,
-    // });
-
     return () => map.current.remove();
-  }, [props.map]);
+  }, []);
 
   useEffect(() => {
-    console.log('Hitting 2nd useEffect()');
     map.current.flyTo({
-      center: props.mapLatLng,
+      center: mapLatLng,
     });
-  }, [props.mapLatLng]);
+  }, [mapLatLng]);
 
   return <div className="map-container" ref={mapContainerRef} />;
 };

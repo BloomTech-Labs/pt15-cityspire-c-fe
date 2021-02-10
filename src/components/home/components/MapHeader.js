@@ -1,5 +1,6 @@
 import React from 'react';
 import { Avatar, Button } from 'antd';
+import { Link } from 'react-router-dom';
 import '../../../antD/styles/mapHeader.css';
 import AlgoliaPlaces from 'algolia-places-react';
 
@@ -59,9 +60,12 @@ const MapHeader = ({ setMapLatLng }) => {
         />
       </div>
       <div className="right-header-section">
-        <Button type="text" className="dashboard-button">
-          Dashboard
-        </Button>
+        <Link to="/dashboard">
+          <Button type="text" className="dashboard-button">
+            Dashboard
+          </Button>
+        </Link>
+
         <Avatar shape="square" size={56} />
       </div>
     </div>

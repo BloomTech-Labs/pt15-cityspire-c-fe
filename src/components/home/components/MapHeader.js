@@ -3,6 +3,7 @@ import { Avatar, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import '../../../antD/styles/mapHeader.css';
 import AlgoliaPlaces from 'algolia-places-react';
+import Map from './Map';
 
 const MapHeader = ({ setMapLatLng }) => {
   const onAlgoliaChange = ({

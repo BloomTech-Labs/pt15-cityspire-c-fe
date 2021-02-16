@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import mapboxgl from 'mapbox-gl';
+import React, { useState, useEffect, useRef } from 'react';
+import mapboxgl, { Marker } from 'mapbox-gl';
 import '../../../antD/styles/map.css';
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
@@ -8,6 +8,7 @@ mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worke
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
 const Map = ({ mapLatLng }) => {
+  const [marker, setMarker] = useState(null);
   const mapContainerRef = useRef(null);
   const map = useRef();
 
@@ -21,10 +22,6 @@ const Map = ({ mapLatLng }) => {
       zoom: 12.5,
     });
 
-    map.current.flyTo({
-      center: mapLatLng,
-    });
-
     map.current.on('load', () => {
       map.current.resize();
     });
@@ -35,9 +32,18 @@ const Map = ({ mapLatLng }) => {
   }, []);
 
   useEffect(() => {
-    map.current.flyTo({
-      center: mapLatLng,
-    });
+    if (mapLatLng != null) {
+      map.current.flyTo({
+        center: mapLatLng,
+      });
+      if (marker != null) {
+        marker.remove();
+      }
+      let mapMarker = new mapboxgl.Marker()
+        .setLngLat([mapLatLng[0], mapLatLng[1]])
+        .addTo(map.current);
+      setMarker(mapMarker);
+    }
   }, [mapLatLng]);
 
   return <div className="map-container" ref={mapContainerRef} />;

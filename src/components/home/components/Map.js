@@ -26,6 +26,10 @@ const Map = ({ mapLatLng }) => {
       map.current.resize();
     });
 
+    map.current.on('click', () => {
+      console.log('You clicked the symbol!');
+    });
+
     map.current.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
     return () => map.current.remove();
@@ -39,9 +43,14 @@ const Map = ({ mapLatLng }) => {
       if (marker != null) {
         marker.remove();
       }
-      let mapMarker = new mapboxgl.Marker()
+
+      let mapMarker = new mapboxgl.Marker({
+        anchor: 'bottom',
+        offset: [0, 6],
+      })
         .setLngLat([mapLatLng[0], mapLatLng[1]])
         .addTo(map.current);
+      mapMarker.getElement().classList.add('clickable');
       setMarker(mapMarker);
     }
   }, [mapLatLng]);

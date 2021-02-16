@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import mapboxgl, { Marker } from 'mapbox-gl';
+import DetailsPane from './DetailsPane';
 import '../../../antD/styles/map.css';
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
@@ -9,6 +10,9 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
 const Map = ({ mapLatLng }) => {
   const [marker, setMarker] = useState(null);
+
+  // Lazy initialization, sets initial value one time, this is to keep the state alive.
+  const [detailClicked, setDetailClicked] = useState(() => false);
   const mapContainerRef = useRef(null);
   const map = useRef();
 
@@ -27,7 +31,8 @@ const Map = ({ mapLatLng }) => {
     });
 
     map.current.on('click', () => {
-      console.log('You clicked the symbol!');
+      // Part of lazy initialization
+      setDetailClicked(previousClicked => !previousClicked);
     });
 
     map.current.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
@@ -55,7 +60,13 @@ const Map = ({ mapLatLng }) => {
     }
   }, [mapLatLng]);
 
-  return <div className="map-container" ref={mapContainerRef} />;
+  return (
+    <>
+      <div className="map-container" ref={mapContainerRef}>
+        {detailClicked && <DetailsPane />}
+      </div>
+    </>
+  );
 };
 
 export default Map;

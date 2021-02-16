@@ -17,7 +17,7 @@ const Home = ({ LoadingComponent }) => {
         FooterComponents={null}
         ContentComponents={
           <>
-            <Map mapLatLng={mapLatLng} /> <DetailsPane />
+            <Map mapLatLng={mapLatLng} />
           </>
         }
         SidebarComponents={null}

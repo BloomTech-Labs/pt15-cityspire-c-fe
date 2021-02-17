@@ -1,9 +1,9 @@
 import React from 'react';
 import { Avatar, Button } from 'antd';
 import { Link } from 'react-router-dom';
-import '../../../antD/styles/mapHeader.css';
 import AlgoliaPlaces from 'algolia-places-react';
-import Map from './Map';
+
+import '../../../antD/styles/mapHeader.css';
 
 const MapHeader = ({ setMapLatLng }) => {
   const onAlgoliaChange = ({
@@ -44,6 +44,7 @@ const MapHeader = ({ setMapLatLng }) => {
     <div className="map-header">
       <div className="left-header-section">
         <AlgoliaPlaces
+          className="algolia-places"
           placeholder="Search for a city"
           options={{
             appId: process.env.REACT_APP_ALGOLIA_PLACES_APP_ID,
@@ -61,13 +62,15 @@ const MapHeader = ({ setMapLatLng }) => {
         />
       </div>
       <div className="right-header-section">
-        <Link to="/dashboard">
-          <Button type="text" className="dashboard-button">
-            Dashboard
-          </Button>
-        </Link>
+        <div className="right-content">
+          <Link to="/dashboard">
+            <Button type="text" className="dashboard-button">
+              Dashboard
+            </Button>
+          </Link>
 
-        <Avatar shape="square" size={56} />
+          <Avatar shape="square" size={56} className="avatar" />
+        </div>
       </div>
     </div>
   );

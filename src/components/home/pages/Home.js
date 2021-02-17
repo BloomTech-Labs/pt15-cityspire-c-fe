@@ -9,7 +9,7 @@ import MapHeader from '../components/MapHeader';
 // Adding multiple components FooterComponents={<><Comp1 /> <Comp2 /></>}
 
 const Home = ({ LoadingComponent }) => {
-  const [mapLatLng, setMapLatLng] = useState([-104.9876, 39.7405]);
+  const [mapLatLng, setMapLatLng] = useState(null); //useState([-104.9876, 39.7405]);
   return (
     <div className="page">
       <LayoutHFCRS
@@ -17,7 +17,7 @@ const Home = ({ LoadingComponent }) => {
         FooterComponents={null}
         ContentComponents={
           <>
-            <Map mapLatLng={mapLatLng} /> <DetailsPane />
+            <Map mapLatLng={mapLatLng} />
           </>
         }
         SidebarComponents={null}

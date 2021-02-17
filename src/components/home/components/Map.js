@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from 'react';
-import mapboxgl from 'mapbox-gl';
+import React, { useState, useEffect, useRef } from 'react';
+import mapboxgl, { Marker } from 'mapbox-gl';
+import DetailsPane from './DetailsPane';
 import '../../../antD/styles/map.css';
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
@@ -8,6 +9,10 @@ mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worke
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
 const Map = ({ mapLatLng }) => {
+  const [marker, setMarker] = useState(null);
+
+  // Lazy initialization, sets initial value one time, this is to keep the state alive.
+  const [detailClicked, setDetailClicked] = useState(() => false);
   const mapContainerRef = useRef(null);
   const map = useRef();
 
@@ -21,12 +26,13 @@ const Map = ({ mapLatLng }) => {
       zoom: 12.5,
     });
 
-    map.current.flyTo({
-      center: mapLatLng,
-    });
-
     map.current.on('load', () => {
       map.current.resize();
+    });
+
+    map.current.on('click', () => {
+      // Part of lazy initialization
+      setDetailClicked(previousClicked => !previousClicked);
     });
 
     map.current.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
@@ -35,12 +41,32 @@ const Map = ({ mapLatLng }) => {
   }, []);
 
   useEffect(() => {
-    map.current.flyTo({
-      center: mapLatLng,
-    });
+    if (mapLatLng != null) {
+      map.current.flyTo({
+        center: mapLatLng,
+      });
+      if (marker != null) {
+        marker.remove();
+      }
+
+      let mapMarker = new mapboxgl.Marker({
+        anchor: 'bottom',
+        offset: [0, 6],
+      })
+        .setLngLat([mapLatLng[0], mapLatLng[1]])
+        .addTo(map.current);
+      mapMarker.getElement().classList.add('clickable');
+      setMarker(mapMarker);
+    }
   }, [mapLatLng]);
 
-  return <div className="map-container" ref={mapContainerRef} />;
+  return (
+    <>
+      <div className="map-container" ref={mapContainerRef}>
+        {detailClicked && <DetailsPane />}
+      </div>
+    </>
+  );
 };
 
 export default Map;

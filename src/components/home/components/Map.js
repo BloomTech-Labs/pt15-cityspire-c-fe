@@ -38,6 +38,8 @@ const Map = ({ mapLatLng }) => {
     map.current.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
     return () => map.current.remove();
+
+    // This is just test code
   }, []);
 
   useEffect(() => {

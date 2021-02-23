@@ -2,6 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import mapboxgl, { Marker } from 'mapbox-gl';
 import DetailsPane from './DetailsPane';
 import '../../../antD/styles/map.css';
+import { axiosAPICall } from '../../../utils/axiosEndpoints';
+import { axiosCodes } from '../../../utils/axiosEndpoints';
+
+import { axiosWithAuth } from '../../../utils/axiosWithAuth';
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
 mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;

@@ -1,5 +1,7 @@
 import { axiosWithAuth } from './axiosWithAuth';
 
+// You need to import axiosCodes where ever you are calling axiosAPICall
+// import { axiosCodes } from <path to axiosEndpoints.js>
 export const axiosCodes = {
   SUCCESS: 'Success',
   ERROR: 'Error',
@@ -9,9 +11,26 @@ export const axiosCodes = {
   DELETE: 'DELETE',
 };
 
-export const getFavorites = () => {};
+/* axiosAPICall takes the following parameters
+path- path to add to base url Ex. /profiles or /favorites/idOfUser
+type- one of 4 axiosCodes - GET, POST, UPDATE, DELETE
+data- data to send to backend, null if none
+callback- success callback
+errorCallback- error callback
 
-export const getFavoriteById = id => {};
+// Full Example where you want to call axios
+    axiosAPICall(
+      '/profiles', - path
+      axiosCodes.GET, - axiosCode
+      null, - data
+      res => {
+        console.log('Data: ', res); - callback for success
+      },
+      err => {
+        console.log('Error: ', err); - callback for error
+      }
+    );
+*/
 
 export const axiosAPICall = (
   path,
@@ -20,10 +39,13 @@ export const axiosAPICall = (
   callback,
   errorCallback
 ) => {
+  const url = process.env.REACT_APP_BACKEND_BASE_API;
+
   switch (type) {
     case axiosCodes.GET: {
+      console.log(`URL Path: ${url}${path}`);
       axiosWithAuth()
-        .get(`${process.env.REACT_APP_BACKEND_BASE_API}${path}`)
+        .get(`${url}${path}`)
         .then(res => {
           if (callback != null) {
             callback({ status: axiosCodes.SUCCESS, data: res.data });
@@ -38,36 +60,48 @@ export const axiosAPICall = (
     }
     case axiosCodes.POST: {
       axiosWithAuth()
-        .post(`${process.env.REACT_APP_BACKEND_BASE_API}/${path}`, data)
+        .post(`${url}${path}`, data)
         .then(res => {
-          return { status: axiosCodes.SUCCESS, data: res.data };
+          if (callback != null) {
+            callback({ status: axiosCodes.SUCCESS, data: res.data });
+          }
         })
         .catch(err => {
-          return { status: axiosCodes.ERROR, data: err };
+          if (errorCallback != null) {
+            errorCallback({ status: axiosCodes.ERROR, data: err });
+          }
         });
       break;
     }
 
     case axiosCodes.UPDATE: {
       axiosWithAuth()
-        .update(`${process.env.REACT_APP_BACKEND_BASE_API}/${path}`, data)
+        .put(`${url}${path}`, data)
         .then(res => {
-          return { status: axiosCodes.SUCCESS, data: res.data };
+          if (callback != null) {
+            callback({ status: axiosCodes.SUCCESS, data: res.data });
+          }
         })
         .catch(err => {
-          return { status: axiosCodes.ERROR, data: err };
+          if (errorCallback != null) {
+            errorCallback({ status: axiosCodes.ERROR, data: err });
+          }
         });
       break;
     }
 
     case axiosCodes.DELETE: {
       axiosWithAuth()
-        .delete(`${process.env.REACT_APP_BACKEND_BASE_API}/${path}`, data)
+        .delete(`${url}${path}`)
         .then(res => {
-          return { status: axiosCodes.SUCCESS, data: res.data };
+          if (callback != null) {
+            callback({ status: axiosCodes.SUCCESS, data: res.data });
+          }
         })
         .catch(err => {
-          return { status: axiosCodes.ERROR, data: err };
+          if (errorCallback != null) {
+            errorCallback({ status: axiosCodes.ERROR, data: err });
+          }
         });
       break;
     }
@@ -75,7 +109,7 @@ export const axiosAPICall = (
     default: {
       return {
         status: axiosCodes.ERROR,
-        data: 'Unknown error occured in AxiosWithAuth',
+        data: 'Unknown error occured in axiosEndpints.js',
       };
     }
   }

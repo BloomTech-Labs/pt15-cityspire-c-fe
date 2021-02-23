@@ -5,6 +5,8 @@ import '../../../antD/styles/map.css';
 import { axiosAPICall } from '../../../utils/axiosEndpoints';
 import { axiosCodes } from '../../../utils/axiosEndpoints';
 
+import { axiosWithAuth } from '../../../utils/axiosWithAuth';
+
 // eslint-disable-next-line import/no-webpack-loader-syntax
 mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
@@ -20,11 +22,15 @@ const Map = ({ mapLatLng }) => {
 
   // This should be removed after testing
   // Checked path GET Path /
+  // DID NOT check path GET /favorite/userid CORS ERROR
+  // DID NOT check path GET /profiles CORS ERROR
+  // DID NOT check path POST /favorite
+
   useEffect(() => {
     console.log('Inside useEffect axios call');
     // This is just test code
     axiosAPICall(
-      '/',
+      '/profiles',
       axiosCodes.GET,
       null,
       res => {

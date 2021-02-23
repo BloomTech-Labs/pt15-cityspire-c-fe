@@ -46,7 +46,6 @@ export const axiosAPICall = (
 
   switch (type) {
     case axiosCodes.GET: {
-      console.log(`URL Path: ${url}${path}`);
       axiosWithAuth()
         .get(`${url}${path}`)
         .then(res => {

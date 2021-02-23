@@ -11,7 +11,10 @@ export const axiosCodes = {
   DELETE: 'DELETE',
 };
 
-/* axiosAPICall takes the following parameters
+/* axiosAPICall is the function you call to use Axios
+import { axiosAPICall } from <path to axiosEndpoints.js>
+
+Takes the following parameters
 path- path to add to base url Ex. /profiles or /favorites/idOfUser
 type- one of 4 axiosCodes - GET, POST, UPDATE, DELETE
 data- data to send to backend, null if none

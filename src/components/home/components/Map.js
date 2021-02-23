@@ -20,29 +20,6 @@ const Map = ({ mapLatLng }) => {
   const mapContainerRef = useRef(null);
   const map = useRef();
 
-  // This should be removed after testing
-  // Checked path GET Path /
-  // DID NOT check path GET /favorite/userid CORS ERROR
-  // DID NOT check path GET /profiles CORS ERROR
-  // DID NOT check path POST /favorite
-
-  useEffect(() => {
-    console.log('Inside useEffect axios call');
-    // This is just test code
-    axiosAPICall(
-      '/profiles',
-      axiosCodes.GET,
-      null,
-      res => {
-        console.log('Data: ', res);
-      },
-      err => {
-        console.log('Error: ', err);
-      }
-    );
-  }, []);
-  // END OF TESTING
-
   // On useEffect hooks, ORDER MATTERS, it must set the reference
   // to the map before accessing methods of map.
   useEffect(() => {

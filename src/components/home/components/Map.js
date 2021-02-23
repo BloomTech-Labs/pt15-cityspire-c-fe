@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import mapboxgl, { Marker } from 'mapbox-gl';
 import DetailsPane from './DetailsPane';
 import '../../../antD/styles/map.css';
+import { axiosAPICall } from '../../../utils/axiosEndpoints';
+import { axiosCodes } from '../../../utils/axiosEndpoints';
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
 mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
@@ -15,6 +17,25 @@ const Map = ({ mapLatLng }) => {
   const [detailClicked, setDetailClicked] = useState(() => false);
   const mapContainerRef = useRef(null);
   const map = useRef();
+
+  // This should be removed after testing
+  // Checked path GET Path /
+  useEffect(() => {
+    console.log('Inside useEffect axios call');
+    // This is just test code
+    axiosAPICall(
+      '/',
+      axiosCodes.GET,
+      null,
+      res => {
+        console.log('Data: ', res);
+      },
+      err => {
+        console.log('Error: ', err);
+      }
+    );
+  }, []);
+  // END OF TESTING
 
   // On useEffect hooks, ORDER MATTERS, it must set the reference
   // to the map before accessing methods of map.
@@ -38,8 +59,6 @@ const Map = ({ mapLatLng }) => {
     map.current.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
     return () => map.current.remove();
-
-    // This is just test code
   }, []);
 
   useEffect(() => {

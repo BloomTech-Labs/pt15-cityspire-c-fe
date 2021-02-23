@@ -1,68 +1,82 @@
 import { axiosWithAuth } from './axiosWithAuth';
 
-export const SUCCESS = 'Success';
-export const ERROR = 'Error';
-export const GET = 'GET';
-export const POST = 'POST';
-export const UPDATE = 'UPDATE';
-export const DELETE = 'DELETE';
+export const axiosCodes = {
+  SUCCESS: 'Success',
+  ERROR: 'Error',
+  GET: 'GET',
+  POST: 'POST',
+  UPDATE: 'UPDATE',
+  DELETE: 'DELETE',
+};
 
 export const getFavorites = () => {};
 
 export const getFavoriteById = id => {};
 
-export const axiosAPICall = (path, type, data) => {
+export const axiosAPICall = (
+  path,
+  type,
+  data = null,
+  callback,
+  errorCallback
+) => {
   switch (type) {
-    case GET: {
+    case axiosCodes.GET: {
       axiosWithAuth()
-        .get(`${process.env.REACT_APP_BACKEND_BASE_URL}${path}`)
+        .get(`${process.env.REACT_APP_BACKEND_BASE_API}${path}`)
         .then(res => {
-          return { status: SUCCESS, data: res.data };
+          if (callback != null) {
+            callback({ status: axiosCodes.SUCCESS, data: res.data });
+          }
         })
         .catch(err => {
-          return { status: ERROR, data: err };
+          if (errorCallback != null) {
+            errorCallback({ status: axiosCodes.ERROR, data: err });
+          }
+        });
+      break;
+    }
+    case axiosCodes.POST: {
+      axiosWithAuth()
+        .post(`${process.env.REACT_APP_BACKEND_BASE_API}/${path}`, data)
+        .then(res => {
+          return { status: axiosCodes.SUCCESS, data: res.data };
+        })
+        .catch(err => {
+          return { status: axiosCodes.ERROR, data: err };
         });
       break;
     }
 
-    case POST: {
+    case axiosCodes.UPDATE: {
       axiosWithAuth()
-        .post(`${process.env.REACT_APP_BACKEND_BASE_URL}/${path}`, data)
+        .update(`${process.env.REACT_APP_BACKEND_BASE_API}/${path}`, data)
         .then(res => {
-          return { status: SUCCESS, data: res.data };
+          return { status: axiosCodes.SUCCESS, data: res.data };
         })
         .catch(err => {
-          return { status: ERROR, data: err };
+          return { status: axiosCodes.ERROR, data: err };
         });
       break;
     }
 
-    case UPDATE: {
+    case axiosCodes.DELETE: {
       axiosWithAuth()
-        .update(`${process.env.REACT_APP_BACKEND_BASE_URL}/${path}`, data)
+        .delete(`${process.env.REACT_APP_BACKEND_BASE_API}/${path}`, data)
         .then(res => {
-          return { status: SUCCESS, data: res.data };
+          return { status: axiosCodes.SUCCESS, data: res.data };
         })
         .catch(err => {
-          return { status: ERROR, data: err };
-        });
-      break;
-    }
-
-    case DELETE: {
-      axiosWithAuth()
-        .delete(`${process.env.REACT_APP_BACKEND_BASE_URL}/${path}`, data)
-        .then(res => {
-          return { status: SUCCESS, data: res.data };
-        })
-        .catch(err => {
-          return { status: ERROR, data: err };
+          return { status: axiosCodes.ERROR, data: err };
         });
       break;
     }
 
     default: {
-      return { status: ERROR, data: 'Unknown error occured in AxiosWithAuth' };
+      return {
+        status: axiosCodes.ERROR,
+        data: 'Unknown error occured in AxiosWithAuth',
+      };
     }
   }
 };

@@ -12,7 +12,7 @@ mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worke
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
-const Map = ({ mapLatLng }) => {
+const Map = ({ mapLatLng, currentPlaceSelection }) => {
   const [marker, setMarker] = useState(null);
 
   // Lazy initialization, sets initial value one time, this is to keep the state alive.
@@ -67,7 +67,9 @@ const Map = ({ mapLatLng }) => {
   return (
     <>
       <div className="map-container" ref={mapContainerRef}>
-        {detailClicked && <DetailsPane />}
+        {detailClicked && (
+          <DetailsPane currentPlaceSelection={currentPlaceSelection} />
+        )}
       </div>
     </>
   );

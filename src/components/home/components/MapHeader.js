@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Avatar, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import AlgoliaPlaces from 'algolia-places-react';
 
 import '../../../antD/styles/mapHeader.css';
 
-const MapHeader = ({ setMapLatLng }) => {
+const MapHeader = ({ setMapLatLng, setCurrentPlaceSelection }) => {
   const onAlgoliaChange = ({
     query,
     rawAnswer,
@@ -14,6 +14,14 @@ const MapHeader = ({ setMapLatLng }) => {
   }) => {
     // Mouse Over and keyboard onChange event
     setMapLatLng([suggestion.latlng.lng, suggestion.latlng.lat]);
+
+    setCurrentPlaceSelection({
+      city: suggestion.name,
+      state: suggestion.administrative,
+      zip: suggestion.postcode,
+      lat: suggestion.latlng.lat,
+      lng: suggestion.latlng.lng,
+    });
   };
 
   const onAlgoliaSuggestions = ({ rawAnswer, query, suggestions }) => {

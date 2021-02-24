@@ -11,15 +11,11 @@ const ContentContainer = () => {
 
   return (
     <div className="dashboard">
-      {saved.map(city => {
+      {saved.map(cityObject => {
         return (
           <CityCard
-            key={city.cityName}
-            cityName={city.cityName}
-            population={city.population}
-            rent={city.rent}
-            walkScore={city.walkScore}
-            liveScore={city.liveScore}
+            key={cityObject.city_id}
+            cityName={cityObject.city}
             saved={saved}
             setSaved={setSaved}
           />

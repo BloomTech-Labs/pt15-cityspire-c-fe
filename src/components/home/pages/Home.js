@@ -10,14 +10,23 @@ import MapHeader from '../components/MapHeader';
 
 const Home = ({ LoadingComponent }) => {
   const [mapLatLng, setMapLatLng] = useState(null); //useState([-104.9876, 39.7405]);
+  const [currentPlaceSelection, setCurrentPlaceSelection] = useState({});
   return (
     <div className="page">
       <LayoutHFCRS
-        HeaderComponents={<MapHeader setMapLatLng={setMapLatLng} />}
+        HeaderComponents={
+          <MapHeader
+            setMapLatLng={setMapLatLng}
+            setCurrentPlaceSelection={setCurrentPlaceSelection}
+          />
+        }
         FooterComponents={null}
         ContentComponents={
           <>
-            <Map mapLatLng={mapLatLng} />
+            <Map
+              mapLatLng={mapLatLng}
+              currentPlaceSelection={currentPlaceSelection}
+            />
           </>
         }
         SidebarComponents={null}

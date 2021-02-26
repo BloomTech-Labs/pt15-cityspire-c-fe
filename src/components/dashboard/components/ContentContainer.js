@@ -15,7 +15,8 @@ const ContentContainer = () => {
         return (
           <CityCard
             key={cityObject.city_id}
-            cityName={cityObject.city}
+            city={cityObject.city}
+            state={cityObject.state}
             saved={saved}
             setSaved={setSaved}
           />

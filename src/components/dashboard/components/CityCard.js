@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import '../../../antD/styles/cityCard.css';
 
+import axios from 'axios';
+
 import Button from '../../common/Button';
 
 const CityCard = props => {
@@ -26,7 +28,21 @@ const CityCard = props => {
   const [cityData, setCityData] = useState({});
 
   useEffect(() => {
-    //api get city specific data. will require location: "city_name, state_name" and return object of data
+    axios
+      .post(
+        'http://cityspire00n.eba-diy2emuk.us-east-1.elasticbeanstalk.com/location/data',
+        {
+          location: `${props.city}, ${props.state}`,
+        }
+      )
+      .then(res => {
+        setCityData({
+          ...res.data,
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }, []);
 
   return (
@@ -37,9 +53,9 @@ const CityCard = props => {
       </div>
       <div className="card-content">
         <p>Population: {cityData.population}</p>
-        <p>Average Rent: {cityData.rent}</p>
-        <p>Walkability Score: {cityData.walkScore}</p>
-        <p>Livability Score: {cityData.liveScore}</p>
+        <p>Average Rent: {cityData.rent_per_month}</p>
+        <p>Walkability: {cityData.walk_score}</p>
+        <p>Liveability: {cityData.livability_score}</p>
       </div>
     </div>
   );

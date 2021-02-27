@@ -42,7 +42,7 @@ export const axiosAPICall = (
   callback,
   errorCallback
 ) => {
-  const url = process.env.REACT_APP_BACKEND_BASE_API;
+  const url = process.env.REACT_APP_API_URI;
 
   switch (type) {
     case axiosCodes.GET: {

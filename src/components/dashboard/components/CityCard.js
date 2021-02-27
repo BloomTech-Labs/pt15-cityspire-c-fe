@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../../../antD/styles/cityCard.css';
 
-import axios from 'axios';
+import { axiosCodes, axiosAPICall } from '../../../utils/axiosEndpoints';
 
 import Button from '../../common/Button';
 
@@ -17,7 +17,17 @@ const CityCard = props => {
   };
 
   const deleteFromDB = () => {
-    //api delete request here, either imported from another file or just written here
+    axiosAPICall(
+      `/favorites/${props.id}`,
+      axiosCodes.DELETE,
+      null,
+      res => {
+        console.log(res);
+      },
+      err => {
+        console.error(err);
+      }
+    );
   };
 
   const unsave = () => {
@@ -28,21 +38,21 @@ const CityCard = props => {
   const [cityData, setCityData] = useState({});
 
   useEffect(() => {
-    axios
-      .post(
-        'http://cityspire00n.eba-diy2emuk.us-east-1.elasticbeanstalk.com/location/data',
-        {
-          location: `${props.city}, ${props.state}`,
-        }
-      )
-      .then(res => {
+    axiosAPICall(
+      '/data/city',
+      axiosCodes.GET,
+      {
+        location: `${props.city}, ${props.state}`,
+      },
+      res => {
         setCityData({
           ...res.data,
         });
-      })
-      .catch(error => {
-        console.error(error);
-      });
+      },
+      err => {
+        console.error(err);
+      }
+    );
   }, []);
 
   return (

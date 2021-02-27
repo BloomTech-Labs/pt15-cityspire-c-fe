@@ -21,9 +21,12 @@ const DetailsPane = ({ currentPlaceSelection }) => {
 
   const saveToDb = () => {
     axiosAPICall(
-      `/favorites/favoritesRouter/`,
+      `/favorites/`,
       axiosCodes.POST,
-      { ...userData.id, ...cityData },
+      {
+        users_id: userData.id,
+        ...currentPlaceSelection,
+      },
       res => {
         console.log(res);
       },
@@ -39,21 +42,21 @@ const DetailsPane = ({ currentPlaceSelection }) => {
   };
 
   useEffect(() => {
-    axios
-      .post(
-        'http://cityspire00n.eba-diy2emuk.us-east-1.elasticbeanstalk.com/location/data',
-        {
-          location: `${currentPlaceSelection.city}, ${currentPlaceSelection.state}`,
-        }
-      )
-      .then(res => {
+    axiosAPICall(
+      '/data/city',
+      axiosCodes.GET,
+      {
+        location: `${currentPlaceSelection.city}, ${currentPlaceSelection.state}`,
+      },
+      res => {
         setCityData({
           ...res.data,
         });
-      })
-      .catch(error => {
-        console.error(error);
-      });
+      },
+      err => {
+        console.error(err);
+      }
+    );
   }, []);
 
   return (

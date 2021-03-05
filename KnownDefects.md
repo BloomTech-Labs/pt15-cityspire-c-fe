@@ -1,6 +1,10 @@
-Test suite failing test 
+Test suite failing test
 
-src/__tests__/RenderHomePage.test.js
-src/__tests__/Home.test.js
+src/**tests**/RenderHomePage.test.js
+src/**tests**/Home.test.js
 
 need to be rewritten to apply to current pages
+
+Left clicking on the map will bring up the details pane whether it is a city or not
+Cities that have no data will not populate data
+DS backend is not sending data to our web backend
